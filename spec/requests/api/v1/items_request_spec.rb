@@ -10,9 +10,23 @@ describe 'Items API Request' do
     items = JSON.parse(response.body)
     expect(items.count).to eq 3
     # And each item has an id, name, description, and image_url but not the created_at or updated_at
-    expect(items.first[:created_at]).to eq nil
-    expect(items.first[:updated_at]).to eq nil
+    expect(items.first["created_at"]).to eq nil
+    expect(items.first["updated_at"]).to eq nil
   end
 
-  it 
+  it 'sends a single item' do
+    create_list(:item, 3)
+    item = Item.last
+    # When I send a GET request to `/api/v1/items/1`
+    get "/api/v1/items/#{item.id}"
+    # I receive a 200 JSON response containing the id, name, description, and image_url but not the created_at or updated_at
+    expect(response).to be_success
+    item = JSON.parse(response.body)
+    expect(item["id"]).to eq item.id.to_s
+    expect(item["name"]).to eq item.name.to_s
+    expect(item["description"]).to eq item.description.to_s
+    expect(item["image_url"]).to eq item.image_url.to_s
+    expect(item["created_at"]).to eq nil
+    expect(item["updated_at"]).to eq nil
+  end
 end
