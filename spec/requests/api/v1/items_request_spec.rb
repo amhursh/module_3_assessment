@@ -29,4 +29,14 @@ describe 'Items API Request' do
     expect(item_response["created_at"]).to eq nil
     expect(item_response["updated_at"]).to eq nil
   end
+
+  it 'deletes a single item' do
+    create_list(:item, 3)
+    item = Item.last
+    # When I send a DELETE request to `/api/v1/items/1`
+    delete "/api/v1/items/#{item.id}"
+    # I receive a 204 JSON response if the record is successfully deleted
+    expect(response).to be_success
+    expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end
