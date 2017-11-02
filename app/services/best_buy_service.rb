@@ -7,9 +7,9 @@ class BestBuyService
     end
   end
 
-  def show
-    @info = 'storeId,longName,city,distance,storeType,phone'
-  end
+  # def show
+  #   @info = 'storeId,longName,city,distance,storeType,phone'
+  # end
 
   def stores_by_zip(zip)
     response = conn.get("stores(area(#{zip},25))?format=json&show=storeId,longName,city,distance,storeType,phone&pageSize=10&apiKey=#{api_key}")
