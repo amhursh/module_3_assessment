@@ -1,0 +1,13 @@
+<h1>Stores within 25 miles of <%= @zip %></h1>
+
+<h3><%= @stores_by_zip.count %> Total Stores</h3>
+
+<% @stores_by_zip.each do |store| %>
+<ul>
+  <h6><%= store.long_name %></h6>
+  <li><%= store.city %></li>
+  <li><%= store.distance %></li>
+  <li><%= store.phone_number %></li>
+  <li><%= store.type %></li>
+</ul>
+<% end %>

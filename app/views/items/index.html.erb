@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12">
       <%= form_tag :search, method: :get do %>
-        <%= text_field_tag :zipp, "Find Stores by zip" %>
+        <%= text_field_tag :zipp %>
         <%= submit_tag "Search" %>
       <% end %>
       <h1><%= @items.count %> Items</h1>
