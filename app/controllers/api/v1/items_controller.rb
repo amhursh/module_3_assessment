@@ -9,4 +9,9 @@ class Api::V1::ItemsController < Api::V1::ApiController
     render json: item, except: [:created_at, :updated_at]
   end
 
+  def destroy
+    Item.delete(params[:id])
+    head :no_content
+  end
+
 end

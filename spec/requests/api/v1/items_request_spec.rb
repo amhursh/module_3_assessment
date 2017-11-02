@@ -39,4 +39,21 @@ describe 'Items API Request' do
     expect(response).to be_success
     expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
+
+  it 'creates an item' do
+    item_params = {
+      name: 'aaron',
+      description: 'the best item',
+      image_url: 'www.google.com'
+    }
+    post '/api/v1/items', params: {item: item_params}
+    # When I send a POST request to `/api/v1/items` with a name, description, and image_url
+    item = Item.last
+    # I receive a 201 JSON  response if the record is successfully created
+    assert_response :success
+    # And I receive a JSON response containing the id, name, description, and image_url but not the created_at or updated_at
+    expect(response).to be_success
+    expect(item.name).to eq item_params[:name]
+    expect(item.description).to eq item_params[:description]
+  end
 end
