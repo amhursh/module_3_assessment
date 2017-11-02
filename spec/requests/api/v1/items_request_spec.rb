@@ -10,5 +10,9 @@ describe 'Items API Request' do
     items = JSON.parse(response.body)
     expect(items.count).to eq 3
     # And each item has an id, name, description, and image_url but not the created_at or updated_at
+    expect(items.first[:created_at]).to eq nil
+    expect(items.first[:updated_at]).to eq nil
   end
+
+  it 
 end
