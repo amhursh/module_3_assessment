@@ -21,12 +21,12 @@ describe 'Items API Request' do
     get "/api/v1/items/#{item.id}"
     # I receive a 200 JSON response containing the id, name, description, and image_url but not the created_at or updated_at
     expect(response).to be_success
-    item = JSON.parse(response.body)
-    expect(item["id"]).to eq item.id.to_s
-    expect(item["name"]).to eq item.name.to_s
-    expect(item["description"]).to eq item.description.to_s
-    expect(item["image_url"]).to eq item.image_url.to_s
-    expect(item["created_at"]).to eq nil
-    expect(item["updated_at"]).to eq nil
+    item_response = JSON.parse(response.body)
+    expect(item_response["id"]).to eq item.id
+    expect(item_response["name"]).to eq item.name
+    expect(item_response["description"]).to eq item.description
+    expect(item_response["image_url"]).to eq item.image_url
+    expect(item_response["created_at"]).to eq nil
+    expect(item_response["updated_at"]).to eq nil
   end
 end
